@@ -36,10 +36,58 @@ class ContentModel: ObservableObject {
         
         getLocalData()
         
+        getRemoteData()
+        
+    }
+    // MARK: - Remote Data methods
+    func getRemoteData() {
+        
+        let urlString = "https://alishergit.github.io/learningapp-data/data2.json"
+        
+        let url = URL(string: urlString)
+        
+        guard url != nil else {
+            return
+        }
+        
+        
+        let requtest = URLRequest(url: url!)
+        
+        // Get the session an kick off the task
+        let session = URLSession.shared
+            
+        let dataTask = session.dataTask(with: requtest) { (data, response, error) in
+            
+            guard error == nil else {
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                
+                let modules = try decoder.decode([Module].self, from: data!)
+                
+                DispatchQueue.main.async {
+                    
+                    self.modules += modules
+                    
+                }
+                
+            }
+            catch{
+                
+            }
+            
+            
+        }
+        
+        // Kick off data task
+        dataTask.resume()
+        
     }
     
     
-    // MARK: - Data methods
+    // MARK: - Local Data methods
     
     func getLocalData() {
         
