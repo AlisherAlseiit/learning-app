@@ -38,7 +38,7 @@ struct ContentView: View {
             .accentColor(.black)
             .padding()
             // MARK: navigationTitle
-            .navigationTitle("Learn \(model.currentModule?.category ?? "" )")
+            .navigationBarTitle("Learn \(model.currentModule?.category ?? "" )")
         }
     }
 }
