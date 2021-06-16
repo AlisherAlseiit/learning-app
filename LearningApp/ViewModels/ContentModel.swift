@@ -171,6 +171,7 @@ class ContentModel: ObservableObject {
         }
     }
     
+    // MARK: - nextQuestion
     func nextQuestion() {
         
         currentQuestionIndex += 1
@@ -195,6 +196,7 @@ class ContentModel: ObservableObject {
         return (currentLessonIndex + 1 < currentModule!.content.lessons.count)
     }
     
+    // MARK: - beginTest
     func beginTest(_ moduleId:Int) {
         
         beginModule(moduleId)

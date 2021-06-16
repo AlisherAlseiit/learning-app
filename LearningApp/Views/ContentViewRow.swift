@@ -13,7 +13,7 @@ struct ContentViewRow: View {
     var index:Int
     
     var lesson: Lesson {
-        if  index < model.currentModule?.content.lessons.count ?? 0{
+        if model.currentModule != nil && index < model.currentModule!.content.lessons.count{
             return model.currentModule!.content.lessons[index]
         }
         else {
@@ -23,7 +23,7 @@ struct ContentViewRow: View {
     
     var body: some View {
         
-        let lesson = model.currentModule!.content.lessons[index]
+        
        
         ZStack(alignment: .leading) {
             

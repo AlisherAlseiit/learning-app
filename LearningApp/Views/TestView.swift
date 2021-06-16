@@ -11,16 +11,18 @@ struct TestView: View {
     @EnvironmentObject var model:ContentModel
     @State var selectedAnswerIndex:Int?
     @State var submitted = false
+    
     @State var numCorrect = 0
+    @State var showResults = false
     
     var body: some View {
         
-        if model.currentQuestion != nil {
+        if model.currentQuestion != nil && showResults == false{
             
             VStack(alignment: .leading) {
                 
                 // Question number
-                Text("Question \(model.currentQuestionIndex + 1) of \(model.currentModule!.test.questions.count ?? 0)")
+                Text("Question \(model.currentQuestionIndex + 1) of \(model.currentModule?.test.questions.count ?? 0)")
                     .padding(.leading, 20)
                 
                 // Question
@@ -92,10 +94,20 @@ struct TestView: View {
                     // Check if answer has been submitted
                     if submitted == true {
                         
-                        model.nextQuestion()
                         
-                        submitted = false
-                        selectedAnswerIndex = nil
+                        if model.currentQuestionIndex + 1 == model.currentModule!.test.questions.count {
+                            
+                            showResults = true
+                        }
+                        else {
+                           
+                            model.nextQuestion()
+                            
+                            submitted = false
+                            selectedAnswerIndex = nil
+                        }
+                        
+                        
                     }
                     else {
                         submitted = true
@@ -126,8 +138,11 @@ struct TestView: View {
             }
             .navigationBarTitle("\(model.currentModule?.category ?? "") Test")
         }
-        else {
+        else if showResults == true{
             TestResultView(numCorrect: numCorrect)
+        }
+        else {
+            ProgressView()
         }
     }
     

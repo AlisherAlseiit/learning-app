@@ -82,5 +82,6 @@ struct ContentDetailView: View {
 struct ContentDetailView_Previews: PreviewProvider {
     static var previews: some View {
         ContentDetailView()
+            .environmentObject(ContentModel())
     }
 }
