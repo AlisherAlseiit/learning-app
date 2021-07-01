@@ -53,6 +53,8 @@ struct ContentDetailView: View {
             else {
                 Button(action: {
                     
+                    model.nextLesson()
+                    
                     model.currentContentSelected = nil
                     
                 }, label: {

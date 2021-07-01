@@ -97,6 +97,8 @@ struct TestView: View {
                         
                         if model.currentQuestionIndex + 1 == model.currentModule!.test.questions.count {
                             
+                            model.nextQuestion()
+                            
                             showResults = true
                         }
                         else {
